@@ -1,0 +1,18 @@
+boot.o: boot.S multiboot.h x86_desc.h types.h
+idt_jmp.o: idt_jmp.S idt_jmp.h types.h
+x86_desc.o: x86_desc.S x86_desc.h types.h
+fs.o: fs.c fs.h types.h syscall.h page.h lib.h
+i8259.o: i8259.c i8259.h types.h lib.h
+irq.o: irq.c types.h irq.h lib.h i8259.h kb.h syscall.h page.h rtc.h \
+  pit.h
+kb.o: kb.c kb.h types.h lib.h syscall.h page.h i8259.h terminal.h pit.h
+kernel.o: kernel.c multiboot.h types.h x86_desc.h lib.h i8259.h debug.h \
+  page.h syscall.h irq.h pit.h kb.h rtc.h idt_jmp.h fs.h terminal.h
+lib.o: lib.c lib.h types.h terminal.h syscall.h page.h
+page.o: page.c page.h types.h syscall.h lib.h
+pit.o: pit.c types.h lib.h i8259.h pit.h syscall.h page.h x86_desc.h kb.h \
+  rtc.h
+rtc.o: rtc.c types.h lib.h rtc.h syscall.h page.h i8259.h pit.h
+syscall.o: syscall.c types.h kb.h lib.h syscall.h page.h fs.h rtc.h \
+  x86_desc.h terminal.h
+terminal.o: terminal.c terminal.h types.h syscall.h page.h lib.h

@@ -1,0 +1,43 @@
+Bug Log
+
+What:    Cannot receive interrupt
+How:    i8259’s mask turns out its active low, bitwise not fixed it.
+
+What:    Higher number of irq handler executed on wrong number
+How:    No alignment for the idt jump table. Adding many .align
+
+What:    Can only receive first irq
+How:    forget to send eoi on slave pin on master pic
+
+What:    KB and RTC can only receive first irq
+How:    Both need to inb to act as a ack
+
+What:    Backspace doesn't work
+How:    need to add a lot of function and if else if to take care of all edge cases
+
+What:    What is a dir read
+How:    Oh so it returns all file names
+
+What:    After execute it runs the program but kb read fails instantly
+How:    We have to init stdin and stdout at execute
+
+What:    Shell runs and execute another program works fine but cannot halt correctly, page fault
+How:    We need to modify TSS so kernel page are perfectly separated
+
+What:    Cannot run more than 8 times a single program, returns no such command
+How:    Halt need to clean the PCB for next use
+
+What:    After some runs file cannot be opened
+How:    Halt need to also clean FD
+
+What:    Switch Terminal mostly done but nothing appears on the screen when printf
+How:    If PageDirEntry have size = 1 then it doesn't looks for its PageTable apparently
+
+What:    Running rtc and pit together result in stackoverflow
+How:    tss.esp0 will always to be pointed to the bottom of the kernel page, no need to calculate each time
+
+What:    Sometimes execute program doesn't work
+How:    Turns out the return value in kb_read is 1 larger than the size result in ghost value
+
+What:    Calculated rtc frequency makes fish moving too slow
+How:    qemu have some weird rtc so the frequency needs to be multiplied by 8 to have actual speed.
